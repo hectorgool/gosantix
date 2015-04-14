@@ -13,6 +13,7 @@ import org.jboss.netty.util.CharsetUtil
 import com.twitter.util.Future
 import play.api.Logger
 import net.liftweb.json._
+import play.api.libs.json.JsValue
 
 
 object FinagleClient{
