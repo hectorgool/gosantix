@@ -111,8 +111,8 @@ object FinagleClient{
         Logger.debug("Received response: " + response)
         client.close()
         //Future.Done
-    }.onFailure{err =>
-      //Logger.error(err)      
+    }.onFailure{ err: Throwable =>
+      Logger.error(err.toString)      
       client.close()
       //Future.Done
     }
