@@ -12,14 +12,16 @@ import org.jboss.netty.handler.codec.http.HttpHeaders.Names._
 import org.jboss.netty.util.CharsetUtil
 import com.twitter.util.Future
 import play.api.Logger
-import net.liftweb.json._
+import play.api.libs.json.Json
 import play.api.libs.json.JsValue
+import play.api.Play.current
 
 
 object FinagleClient{
 
 
-  val hosts= "localhost:9200"
+  //val hosts= "localhost:9200"
+  val hosts = current.configuration.getString("elasticsearch.hosts").get
 
   /**
    * You init a clientFactory only once and use it several times across your application
@@ -34,7 +36,7 @@ object FinagleClient{
   /**
    * The path to the elastic search table (index) and the json to send
    */
-  def documentSave(path: List[String], json: JValue) ={
+  def documentSave(path: List[String], json: JsValue) ={
     Logger.debug("json is %s" format json)
     val req = requestBuilderPut(path, json)
     sendToElastic(req)
@@ -43,18 +45,18 @@ object FinagleClient{
   /**
    * Generate a request to send to ElasticSearch
    * @param path the path to your document, as a list
-   * @param json ths JValue representing the payload, i.e. ("id" -> "1") ~ ("part_number" -> "02k7011")
+   * @param json ths JsValue representing the payload, i.e. ("id" -> "1") ~ ("part_number" -> "02k7011")
    * @return a request object
    */
-  def requestBuilderPut(path: List[String], json: JValue): DefaultHttpRequest = {
-    val payload = ChannelBuffers.copiedBuffer( compact(render(json))  , UTF_8)
+  def requestBuilderPut(path: List[String], json: JsValue): DefaultHttpRequest = {
+    val payload = ChannelBuffers.copiedBuffer( Json.stringify(json) , UTF_8)
     val _path = path.mkString("/","/","")
     val request = new DefaultHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.PUT, _path)
-    request.setHeader("User-Agent", "Finagle - Liftweb")
-    //request.setHeader("Host", host.openOr("localhost")) // the host.openOr("localhost") can be replace for host.openOr("default value here")
-    request.setHeader(CONTENT_TYPE, "application/json")
-    request.setHeader(CONNECTION, "keep-alive")
-    request.setHeader(CONTENT_LENGTH, String.valueOf(payload.readableBytes()));
+    request.headers().add("User-Agent", "Finagle - Play")
+    request.headers().add("Host", hosts) // the host.openOr("localhost") can be replace for host.openOr("default value here")
+    request.headers().add(CONTENT_TYPE, "application/json")
+    request.headers().add(CONNECTION, "keep-alive")
+    request.headers().add(CONTENT_LENGTH, String.valueOf(payload.readableBytes()));
     request.setContent(payload)
     Logger.debug("Sending request:\n%s".format(request))
     Logger.debug("Sending body:\n%s".format(request.getContent.toString(CharsetUtil.UTF_8)))
@@ -64,17 +66,17 @@ object FinagleClient{
   /**
    * Generate a request to search the Elastic Search instance
    * @param path the path to your document, as a list
-   * @param json ths JValue representing the payload, i.e. ("id" -> "1") ~ ("part_number" -> "02k7011")
+   * @param json ths JsValue representing the payload, i.e. ("id" -> "1") ~ ("part_number" -> "02k7011")
    * @return a request object
    */
-  def requestBuilderGet(path: List[String], json: JValue): DefaultHttpRequest = {
-    val payload = ChannelBuffers.copiedBuffer( compact(render(json))  , UTF_8)
+  def requestBuilderGet(path: List[String], json: JsValue): DefaultHttpRequest = {
+    val payload = ChannelBuffers.copiedBuffer( Json.stringify(json) , UTF_8)
     val _path = path.mkString("/","/","")
     val request = new DefaultHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, _path)
-    request.setHeader("User-Agent", "Finagle - Liftweb")
-    //request.setHeader("Host", host.openOr("localhost"))
-    request.setHeader(CONTENT_TYPE, "application/x-www-form-urlencoded")
-    request.setHeader(CONTENT_LENGTH, String.valueOf(payload.readableBytes()));
+    request.headers().add("User-Agent", "Finagle - Play")
+    request.headers().add("Host", hosts)
+    request.headers().add(CONTENT_TYPE, "application/x-www-form-urlencoded")
+    request.headers().add(CONTENT_LENGTH, String.valueOf(payload.readableBytes()));
     request.setContent(payload)
     Logger.debug("Sending request:\n%s".format(request))
     Logger.debug("Sending body:\n%s".format(request.getContent.toString(CharsetUtil.UTF_8)))
@@ -89,8 +91,8 @@ object FinagleClient{
   def requestBuilderDelete(path: List[String]): DefaultHttpRequest = {
     val _path = path.mkString("/","/","")
     val request = new DefaultHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.DELETE, _path)
-    request.setHeader("User-Agent", "Finagle - Liftweb")
-    //request.setHeader("Host", host.openOr("localhost"))
+    request.headers().add("User-Agent", "Finagle - Play")
+    request.headers().add("Host", hosts)
     Logger.debug("Sending request:\n%s".format(request))
     Logger.debug("Sending body:\n%s".format(request.getContent.toString(CharsetUtil.UTF_8)))
     request
@@ -109,15 +111,12 @@ object FinagleClient{
     httpResponse.onSuccess{
       response =>
         Logger.debug("Received response: " + response)
-        client.release()
-        Future.Done
-    }.onFailure{err =>
-      //Logger.error(err)      
-      client.release()
-      Future.Done
+        client.close()
+    }.onFailure{ err: Throwable =>
+        Logger.error(err.toString)      
+        client.close()
     }
   }
-
 
   /**
    * Deletes all the indeces from elastic search
@@ -128,12 +127,12 @@ object FinagleClient{
     sendToElastic(req)
   }
 
-  def documentSearch(json: JValue): Future[HttpResponse] ={
+  def documentSearch(json: JsValue): Future[HttpResponse] ={
     val req = requestBuilderGet(List("santix", "items", "_search"), json)
     sendToElastic(req)
   }
 
-  def documentSearch(index: String, indexType: String, json: JValue): Future[HttpResponse] ={
+  def documentSearch(index: String, indexType: String, json: JsValue): Future[HttpResponse] ={
     val req = requestBuilderGet(List( index, indexType, "_search"), json)
     sendToElastic(req)
   }
