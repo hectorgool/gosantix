@@ -15,3 +15,137 @@ class Elastisearch
 		}
 
 Elastisearch.searchTerm()
+
+
+curl -X POST http://localhost:9000/users -H "Content-Type: application/json" -d "{\"email\": \"test@test.com\"}"
+
+{\"query\":{\"term\":{\"name.autocomplete":\"asdf\"}},"facets":{\"name\":{\"terms\":{\"field":\"name\"}}}}
+
+curl -X POST http://localhost:9000/alfa -H "Content-Type: application/json" -d "{\"query\":{\"term\":{\"name.autocomplete":\"asdf\"}},"facets":{\"name\":{\"terms\":{\"field":\"name\"}}}}"
+
+
+para probar
+
+curl -H "Content-Type: application/json" -X POST -d ' {"query":{"term":{"name.autocomplete":"d"}},"facets":{"name":{"terms":{"field":"name"}}}}' http://localhost:9000/alfa
+
+
+curl -H "Content-Type: application/json" -X POST -d ' {"query":{"term":{"name.autocomplete":"d"}},"facets":{"name":{"terms":{"field":"name"}}}}' http://localhost:9200/santix/items/_search
+
+
+
+def alfa = Action.async(parse.json) { request =>
+
+	val response = FinagleClient.longRunningComputation(request.body )  		
+	response.map( rest => Ok("Got result: " + rest ))
+
+}
+
+found   : com.twitter.util.Future[play.api.mvc.Result]
+required: scala.concurrent.Future[play.api.mvc.Result]
+
+response.map(rest => Ok("Got result: " + rest))
+
+
+respuesta:
+
+
+DefaultHttpResponse(chunked: false)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Content-Length: 1547
+
+
+
+
+
+  def findByName(name: String) = Action.async {
+    // let's do our query
+    val cursor: Cursor[JsObject] = collection.
+      // find all people with name `name`
+      find(Json.obj("name" -> name)).
+      // sort them by creation date
+      sort(Json.obj("created" -> -1)).
+      // perform the query and get a cursor of JsObject
+      cursor[JsObject]
+
+    // gather all the JsObjects in a list
+    val futurePersonsList: Future[List[JsObject]] = cursor.collect[List]()
+
+    // transform the list into a JsArray
+    val futurePersonsJsonArray: Future[JsArray] = futurePersonsList.map { persons =>
+      Json.arr(persons)
+    }
+
+    // everything's ok! Let's reply with the array
+    futurePersonsJsonArray.map { persons =>
+      Ok(persons)
+    }
+  }
+
+
+  GET     /users                      @controllers.Users.
+
+
+  futureScala.map( f => Ok( "Got result: " + f ) )
+
+  val jsonElasticSearchResult = parse( f.getContent.toString(CharsetUtil.UTF_8) )
+
+
+    response.onSuccess{res =>
+      try {
+        println("*******************"+ res + "**********************")
+        val jsonElasticSearchResult = parse( res.getContent.toString(CharsetUtil.UTF_8) )
+        //InboxActor ! ElasticSearchResult( jsonElasticSearchResult )
+        NamedCometListener.getDispatchersFor(Full("result")).foreach(actor => actor.map( _ ! ElasticSearchResult( jsonElasticSearchResult ) ))
+
+      } catch {
+
+        case e: JsonParser.ParseException => 
+          "Means the string is not valid JSON"
+        case m: MappingException => 
+          "Means the string is JSON, but doesn't respect the format of Document"
+          logger.error(m.getMessage)
+
+      }
+
+      Future.Done
+
+    }.onFailure{
+
+      err =>
+        logger.error(err)
+        Future.Done
+        
+    }
+
+
+    ******el rest funciona:
+    http://localhost:9000/alfa
+    regresa el json de elasticsearch
+
+    curl -H "Content-Type: application/json" -X POST -d ' {"query":{"term":{"name.autocomplete":"d"}},"facets":{"name":{"terms":{"field":"name"}}}}' http://localhost:9000/alfa
+
+    send json to a controller
+
+
+    POST   /person                     controllers.Application.createFromJson
+
+
+  def createFromJson = Action.async(parse.json) { request =>
+    
+    /*
+     * request.body is a JsValue.
+     * There is an implicit Writes that turns this JsValue as a JsObject,
+     * so you can call insert() with this JsValue.
+     * (insert() takes a JsObject as parameter, or anything that can be
+     * turned into a JsObject using a Writes.)
+     */
+
+    
+    request.body.transform(transformer).map { result =>
+      collection.insert(result).map { lastError =>
+        Logger.debug(s"Successfully inserted with LastError: $lastError")
+        Created
+      }
+    }.getOrElse(Future.successful(BadRequest("invalid json")))
+  }
