@@ -85,7 +85,7 @@
 		            		>
 
 		              		<span class="input-group-addon btn-white">
-		                		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		                		<span ng-if="jsonResponse.hits.total > 0">Hits: {{ jsonResponse.hits.total }}</span> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 		              		</span>
 
 		          		</div> 
@@ -120,7 +120,6 @@
 						<hr>
 
 		        		<!--<pre> {{ jsonResponse |json }}</pre>-->
-		        		
 
 		        	</div>
 		      	</form>
