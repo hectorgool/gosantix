@@ -2,40 +2,6 @@ if (window.console) {
   console.log("Welcome to your Play application's JavaScript!");
 }
 
-//var app = angular.module("myApp", ['ngResource', 'myAppServices']);
-
-/*
-app.controller("ElasticSearchCtrl", function ($scope) {
-
-	$scope.term = null;
-
-	$scope.onKeyUp = function () {
-      
-  	//console.log('$event: ' + $event );      	
-    var jsonTerm = {
-    	query: {
-        	term: {
-          		"name.autocomplete": $("#term").val()
-        	}
-      	},
-      	facets: {
-        	name: {
-          		terms: {
-            		field: "name"
-          		}
-        	}
-      	}
-    };
-
-    //http://stackoverflow.com/questions/1625208/print-content-of-javascript-object
-    console.log('jsonTerm: ' + jsonTerm.toSource() );
-    $scope.term = jsonTerm;
-
-  };
-
-
-});
-*/
 (function(){
 
   'use strict';

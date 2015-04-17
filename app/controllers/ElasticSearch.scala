@@ -38,7 +38,6 @@ object ElasticSearch extends Controller {
 	    val futureFinagle = FinagleClient.documentSearch( json )
 	    val futureScala = Santix.twitter2Scala( futureFinagle)
  
-	    //futureScala.map( f => Ok( "Got result: " + f ) )
 	    futureScala.map( f => 
 	    	Ok( "Got result: " + Json.parse(f.getContent.toString(CharsetUtil.UTF_8)) ) 
 	    )

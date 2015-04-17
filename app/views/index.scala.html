@@ -80,7 +80,7 @@
 		            			class="form-control input-lg" 
 		            			ng-keyup="onKeyUp()" 
 		            			type="text" 
-		            			placeholder="Search" 
+		            			placeholder="Search items" 
 		            			autocomplete="off"
 		            		>
 
@@ -90,13 +90,37 @@
 
 		          		</div> 
 
-		          		<hr>
+		          		<!--<pre> {{ term }}</pre>-->
+		          		<!--<pre> Hits: {{ jsonResponse.hits.total }}</pre>-->
 
-		          		<pre> {{ term }}</pre>         
+						<div ng-repeat="j in jsonResponse.hits.hits">
+					        <div class="row">
+					          <div class="col-md-12">
+					            <h3>
+					              <a class="link" href="http://localhost:9000/{{j._source.slug}}">
+					              	{{j._source.name}}
+					              </a> <small>by</small> 
+					              <a class="username" href="http://localhost:9000/{{j._source.slug}}">
+					              	{{j._source.username}}
+					              </a>
+					            </h3>
+					          </div>
+					        </div>
 
-		          		<hr>
+					        <div class="row">
+					          <div class="col-md-12">
+					            <div class="description">
+					            	{{j._source.description}}
+					            </div>
+					          </div>
+					        </div>
+				        </div>
 
-		        		<pre> {{ jsonResponse |json }}</pre>         
+
+						<hr>
+
+		        		<!--<pre> {{ jsonResponse |json }}</pre>-->
+		        		
 
 		        	</div>
 		      	</form>
@@ -117,14 +141,9 @@
 	<script src='@routes.Assets.at("lib/angular-route.min.js")' type="text/javascript"></script>
 	<script src='@routes.Assets.at("lib/angular-resource.min.js")' type="text/javascript"></script>
 	
-	<script src="/assets/javascripts/hello.js"></script>
-
-	<!--
-	<script src="/assets/javascripts/elasticsearch/CreateTermCtrl.js"></script>
-	<script src="/assets/javascripts/elasticsearch/ElasticSearchService.js"></script>
-	-->
-
-    <!--<script src="@routes.Assets.at("javascripts/main.js")"></script>-->
+	<!--<script src="/assets/javascripts/hello.js"></script>-->
+	<script src="/assets/javascripts/elasticsearch/ElasticSearchCtrl.js"></script>
+	<script src="/assets/javascripts/elasticsearch/ElasticSearchServices.js"></script>
 
 </body>
 </html>
