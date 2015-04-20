@@ -1,3 +1,13 @@
+import com.tuplejump.sbt.yeoman.Yeoman
+import com.typesafe.sbt.SbtScalariform._
+import play.PlayScala
+
+import scalariform.formatter.preferences._
+
+//********************************************************
+// Play settings
+//*************
+
 name := """gosantix"""
 
 version := "1.0-SNAPSHOT"
@@ -16,5 +26,19 @@ libraryDependencies ++= Seq(
   "com.twitter"              % "finagle-stream_2.11"     % "6.24.0",
   "com.twitter"              % "finagle-http_2.11"       % "6.24.0",
   "org.twitter4j"            % "twitter4j-core"          % "4.0.2",
-  "net.liftweb"             %% "lift-json"               % "2.6"
+  "net.liftweb"             %% "lift-json"               % "2.6",
+  "com.mohiva"              %% "play-silhouette"         % "2.0",
+  "net.codingwell"          %% "scala-guice"             % "4.0.0-beta5"
 )
+
+
+//********************************************************
+// Scalariform settings
+//********************************************************
+
+defaultScalariformSettings
+
+ScalariformKeys.preferences := ScalariformKeys.preferences.value
+  .setPreference(FormatXml, false)
+  .setPreference(DoubleIndentClassDeclaration, false)
+  .setPreference(PreserveDanglingCloseParenthesis, true)
