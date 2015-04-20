@@ -19,12 +19,12 @@ do ->
         jsonTerm = 
           query: term: 'name.autocomplete': $('#term').val()
           facets: name: terms: field: 'name'
-        console.log 'jsonTerm: ' + jsonTerm.toSource()
+        #console.log 'jsonTerm: ' + jsonTerm.toSource()
         $scope.term = jsonTerm
         ElasticSearchQuery.save {}, jsonTerm, ((response) ->
           console.log 'Success:' + JSON.stringify(response)
           $scope.jsonResponse = response
-          $location.path '/'
+          #$location.path '/'
           return
         ), (errorResponse) ->
           console.log 'Error:' + JSON.stringify(errorResponse)
