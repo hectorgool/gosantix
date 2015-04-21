@@ -1,9 +1,3 @@
-import com.tuplejump.sbt.yeoman.Yeoman
-import com.typesafe.sbt.SbtScalariform._
-import play.PlayScala
-
-import scalariform.formatter.preferences._
-
 //********************************************************
 // Play settings
 //*************
@@ -30,15 +24,4 @@ libraryDependencies ++= Seq(
   "com.mohiva"              %% "play-silhouette"         % "2.0",
   "net.codingwell"          %% "scala-guice"             % "4.0.0-beta5"
 )
-
-
-//********************************************************
-// Scalariform settings
-//********************************************************
-
-defaultScalariformSettings
-
-ScalariformKeys.preferences := ScalariformKeys.preferences.value
-  .setPreference(FormatXml, false)
-  .setPreference(DoubleIndentClassDeclaration, false)
-  .setPreference(PreserveDanglingCloseParenthesis, true)
+ 

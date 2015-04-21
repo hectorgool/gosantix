@@ -1,0 +1,62 @@
+
+
+    <!--search-->
+    <div id="row">
+        <div class="col-md-12">
+        
+          <form>
+              <div ng-controller="ElasticSearchCtrl">
+
+                  <div class="input-group">
+                    <input id="term" 
+                      class="form-control input-lg" 
+                      ng-keyup="onKeyUp()" 
+                      type="text" 
+                      placeholder="Search items" 
+                      autocomplete="off"
+                    >
+
+                      <span class="input-group-addon btn-white">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 
+                        <span ng-if="jsonResponse.hits.total > 0">Hits: {{ jsonResponse.hits.total }}</span> 
+                      </span>
+
+                  </div> 
+
+                  <!--<pre> {{ term }}</pre>-->
+                  <!--<pre> Hits: {{ jsonResponse.hits.total }}</pre>-->
+
+            <div ng-repeat="j in jsonResponse.hits.hits">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3>
+                        <a class="link" href="http://localhost:9000/{{j._source.slug}}">
+                          <span ng-bind="j._source.name"></span>
+                        </a> <small>by</small> 
+                        <a class="username" href="http://localhost:9000/{{j._source.slug}}">
+                          <span ng-bind="j._source.username"></span>
+                        </a>
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="description">
+                        <span ng-bind="j._source.description"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+            <hr>
+
+                <!--<pre> {{ jsonResponse |json }}</pre>-->
+
+              </div>
+            </form>
+        
+        </div>
+    </div>
+    <!--end:search-->

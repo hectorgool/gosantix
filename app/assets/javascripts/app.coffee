@@ -1,4 +1,4 @@
-do ->
+#do ->
   'use strict'
   app = undefined
   dependencies = undefined
@@ -10,12 +10,14 @@ do ->
   ]
   app = angular.module('myApp', dependencies)
   app.config ($routeProvider) ->
-    $routeProvider.when '/tmp1',
+    $routeProvider.when '/',
       templateUrl: 'partials/index.html'
-      controller: 'AppController'
-    $routeProvider.when '/tmp2',
-      templateUrl: 'partials/index.html'
-      controller: 'AppController'      
-    #$routeProvider.otherwise templateUrl: 'app/partials/404.html'
+    #  controller: 'ElasticSearchCtrl'
+    $routeProvider.when '/signup', 
+      templateUrl: 'partials/signup.html'
+    $routeProvider.when '/login', 
+      templateUrl: 'partials/login.html'      
+    #$routeProvider.otherwise 
+    #  templateUrl: 'partials/404.html'
     return
-  return
+  #return  
