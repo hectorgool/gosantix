@@ -3,7 +3,7 @@ if (window.console) {
   console.log("Welcome to your Play application's JavaScript!");
 }
 */
-
+/*
 (function(){
 
   'use strict';
@@ -39,3 +39,14 @@ if (window.console) {
   }); 
 
 })();
+*/
+
+
+angular.module("myApp.auth", [])
+  .controller('SignupCtrl', ['$scope',  '$location', function SignupCtrl($scope, $location)  {
+
+    $scope.submit = function(){
+      console.log('firstName'  + $scope.firstName  + "lastName" + $scope.lastName);
+    };
+
+  }]);
