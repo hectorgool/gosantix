@@ -1,3 +1,104 @@
 
 
-Signup!
+<div class="container">
+    
+    <div class="col-md-6 col-md-offset-3">
+
+        <h2>
+            Signup
+        </h2>
+        
+        <form role="form" 
+              accept-charset="UTF-8" 
+              autocomplete="off" 
+              ng-submit="submit()" 
+              ng-controller="SignupCtrl as signUp"
+        >
+
+            <div class="form-group">
+                <label for="firstName">
+                    FirstName
+                </label>
+                <input id="firstName" 
+                       name="firstName" 
+                       placeholder="FirstName"  
+                	   autofocus="autofocus" 
+                       autocomplete="off" 
+                       class="form-control input-lg" 
+                       ng-model="signUp.firstName" 
+                       required
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">
+                    LastName
+                </label>
+                <input id="lastName" 
+                       name="lastName" 
+                       placeholder="LastName" 
+                       autofocus="autofocus"
+                       autocomplete="off" 
+                       class="form-control input-lg"
+                       ng-model="signUp.lastName" 
+                       required
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="email">
+                    Email
+                </label>
+                <input id="email" 
+                       name="email" 
+                       placeholder="Email" 
+                       autocomplete="off" 
+                       class="form-control input-lg"
+                       ng-model="signUp.email" 
+                       required                       
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="passwd">
+                    Password
+                </label>
+                <input id="passwd" 
+                       name="passwd" 
+                       placeholder="Password" 
+                       autocomplete="off" 
+                       class="form-control input-lg"
+                       ng-model="signUp.password" 
+                       required                       
+                />
+            </div>
+
+            <!--
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <center>
+                        <div id="recaptcha">
+                        </div>
+                    </center>
+                </div>    
+            </div>
+        	-->
+
+            <!--<span class="lift:Msg?id=reCaptcha">error</span>-->
+                                          
+            <button type="submit"  class="btn btn-lg btn-white btn-block">
+                Signup Send
+            </button>
+
+            <p class="text-right">
+                <a class="text-right" href="#">
+                    Términos y Condiciones
+                </a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+

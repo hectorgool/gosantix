@@ -45,6 +45,7 @@ class CredentialsAuthController @Inject() (
    * @return The result to display.
    */
   def authenticate = Action.async(parse.json) { implicit request =>
+
     request.body.validate[Credentials].map { credentials =>
       (env.providers.get(CredentialsProvider.ID) match {
         case Some(p: CredentialsProvider) => p.authenticate(credentials)
@@ -66,5 +67,6 @@ class CredentialsAuthController @Inject() (
       case error =>
         Future.successful(Unauthorized(Json.obj("message" -> Messages("invalid.credentials"))))
     }
+    
   }
 }

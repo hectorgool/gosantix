@@ -24,7 +24,8 @@ object ElasticSearch extends Controller {
 
 	def term = Action.async(parse.json) { request =>
  
-	    val futureFinagle = FinagleClient.documentSearch( request.body )          
+ 		val json = request.body
+	    val futureFinagle = FinagleClient.documentSearch( json )          
 	    val futureScala = Santix.twitter2Scala( futureFinagle)
  
 	    futureScala.map( f => 

@@ -39,13 +39,22 @@ class SignUpController @Inject() (
    * @return The result to display.
    */
   def signUp = Action.async(parse.json) { implicit request =>
+
     request.body.validate[SignUpForm.Data].map { data =>
+
       val loginInfo = LoginInfo(CredentialsProvider.ID, data.email)
+
+      println( " ** data: " + data )//depurar
+
       userService.retrieve(loginInfo).flatMap {
+
         case Some(user) =>
           Future.successful(BadRequest(Json.obj("message" -> Messages("user.exists"))))
+
         case None =>
+
           val authInfo = passwordHasher.hash(data.password)
+
           val user = User(
             userID = UUID.randomUUID(),
             loginInfo = loginInfo,
@@ -55,20 +64,29 @@ class SignUpController @Inject() (
             email = Some(data.email),
             avatarURL = None
           )
+
           for {
+
             user <- userService.save(user)
             authInfo <- authInfoService.save(loginInfo, authInfo)
             authenticator <- env.authenticatorService.create(loginInfo)
             token <- env.authenticatorService.init(authenticator)
+
           } yield {
+
             env.eventBus.publish(SignUpEvent(user, request, request2lang))
             env.eventBus.publish(LoginEvent(user, request, request2lang))
             Ok(Json.obj("token" -> token))
+
           }
+
       }
+
     }.recoverTotal {
+
       case error =>
         Future.successful(Unauthorized(Json.obj("message" -> Messages("invalid.data"))))
+        
     }
   }
 }
