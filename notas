@@ -368,3 +368,55 @@ Content-Length: 1547
   }); 
 
 })();
+
+
+angularjs forms
+
+
+1. nombre al formulario
+
+<form role="form" 
+              accept-charset="UTF-8" 
+              autocomplete="off" 
+              ng-submit="submit()" 
+              ng-controller="SignupCtrl as signUp"
+              name="signup"
+
+2. ng-model a los conponentes
+
+
+(function(){
+
+  'use strict';
+
+  var app, dependencies;
+
+  dependencies = ['ngResource', 'ngRoute','myApp.controller'];
+  app = angular.module('myApp', dependencies);
+  
+  app.config( function( $routeProvider, $locationProvider ){   
+
+    $routeProvider.when('/', {
+      templateUrl: '/assets/partials/index.html',
+      controller: 'ElasticSearchCtrl'
+    });   
+
+
+    $routeProvider.when('/signup', {
+      templateUrl: '/assets/partials/signup.html'//,
+      //controller: 'PostCtrl'
+    });
+    
+    $routeProvider.when('/login', {
+      templateUrl: '/assets/partials/login.html'//,
+      //controller: 'PostCtrl'
+    });
+    
+    $routeProvider.otherwise({
+      redirectTo: '/'
+    });
+  
+
+  }); 
+
+})();         

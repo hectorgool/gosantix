@@ -9,68 +9,83 @@
         </h2>
         
         <form role="form" 
+              name="signupForm" 
               accept-charset="UTF-8" 
               autocomplete="off" 
-              ng-submit="submit()" 
-              ng-controller="SignupCtrl as signUp"
+              ng-controller="SignUpController"
+              ng-submit="signupForm.$valid && addSignUp( )" 
+              novalidate
         >
 
             <div class="form-group">
+
                 <label for="firstName">
                     FirstName
                 </label>
+
                 <input id="firstName" 
                        name="firstName" 
                        placeholder="FirstName"  
-                	   autofocus="autofocus" 
+                	     autofocus="autofocus" 
                        autocomplete="off" 
                        class="form-control input-lg" 
-                       ng-model="signUp.firstName" 
+                       ng-model="signup.firstName" 
                        required
                 />
+
             </div>
 
             <div class="form-group">
+
                 <label for="lastName">
                     LastName
                 </label>
+
                 <input id="lastName" 
                        name="lastName" 
                        placeholder="LastName" 
                        autofocus="autofocus"
                        autocomplete="off" 
                        class="form-control input-lg"
-                       ng-model="signUp.lastName" 
+                       ng-model="signup.lastName" 
                        required
                 />
+
             </div>
 
             <div class="form-group">
+
                 <label for="email">
                     Email
                 </label>
+
                 <input id="email" 
                        name="email" 
                        placeholder="Email" 
                        autocomplete="off" 
                        class="form-control input-lg"
-                       ng-model="signUp.email" 
+                       ng-model="signup.email" 
                        required                       
                 />
+
             </div>
 
             <div class="form-group">
+
                 <label for="passwd">
                     Password
                 </label>
+
                 <input id="passwd" 
                        name="passwd" 
+                       type="password"
                        placeholder="Password" 
                        autocomplete="off" 
                        class="form-control input-lg"
-                       ng-model="signUp.password" 
+                       ng-model="signup.password" 
                        required                       
                 />
+
             </div>
 
             <!--
@@ -95,6 +110,12 @@
                     Términos y Condiciones
                 </a>
             </p>
+
+            <!--
+            <div>
+              signupForm is: {{ signupForm.$valid }}
+            </div>
+            -->
 
         </form>
 
