@@ -4,14 +4,23 @@ if (window.console) {
 }
 */
 
-angular.module("myApp.auth", [])
-  .controller('SignUpController', ['$scope', function SignUpController( $scope )  {
+(function(){
 
-    $scope.signup = {};
 
-    $scope.addSignUp = function(  ){
-      console.log(' firstName: '  + $scope.signup.firstName  + " lastName: " + $scope.signup.lastName);
-      $scope.signup = {};
-    };
+  'use  strict';
+  
+  var app = angular.module( 'signupServices',  ['ngResource'] );
+
+  app.factory('SignUpQuery', ['$resource', function( $resource ){
+
+    return $resource("/auth/signup", {}, {
+      get:    {method:  'GET',    cache:  false,  isArray:  false},
+      save:   {method:  'POST',   cache:  false,  isArray:  false},
+      update: {method:  'PUT',    cache:  false,  isArray:  false},
+      delete: {method:  'DELETE', cache:  false,  isArray:  false}
+    });
 
   }]);
+
+
+})();

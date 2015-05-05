@@ -15,7 +15,7 @@ GET         /authenticate/:provider          @controllers.SocialAuthController.a
 POST        /authenticate/:provider          @controllers.SocialAuthController.authenticate(provider)
 
 # Dynamic part of the url
-GET         /views/$template<.+>.html        @controllers.ApplicationController.view(template)
+#GET         /views/$template<.+>.html        @controllers.ApplicationController.view(template)
 
 #santo
 POST        /term                            controllers.ElasticSearch.term
