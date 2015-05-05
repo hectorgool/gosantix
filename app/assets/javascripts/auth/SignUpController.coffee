@@ -1,6 +1,6 @@
 
 'use  strict'
-app = angular.module('myApp.auth', [ 'signupServices' ])
+app = angular.module('auth', [ 'signupServices' ])
 app.controller 'SignUpController', [
   '$scope'
   'SignUpQuery'

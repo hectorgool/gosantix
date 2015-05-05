@@ -4,8 +4,8 @@ dependencies = undefined
 dependencies = [
   'ngResource'
   'ngRoute'
-  'myApp.controller'
-  'myApp.auth'
+  'elasticsearch'
+  'auth'
 ]
 app = angular.module('myApp', dependencies)
 app.config ($routeProvider, $locationProvider) ->
