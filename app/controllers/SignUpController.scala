@@ -44,7 +44,7 @@ class SignUpController @Inject() (
 
       val loginInfo = LoginInfo(CredentialsProvider.ID, data.email)
 
-      println( " ** data: " + data )//depurar
+      println( " --> data: " + data )//depurar
 
       userService.retrieve(loginInfo).flatMap {
 
