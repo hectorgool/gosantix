@@ -33,7 +33,11 @@ class UserServiceImpl @Inject() (userDAO: UserDAO) extends UserService {
    * @param user The user to save.
    * @return The saved user.
    */
-  def save(user: User) = userDAO.save(user)
+  //def save(user: User) = userDAO.save(user)
+  def save(user: User) = {
+    println( " UserServiceImpl.save: " + user )
+    userDAO.save(user)
+  }
 
   /**
    * Saves the social profile for a user.
@@ -54,6 +58,7 @@ class UserServiceImpl @Inject() (userDAO: UserDAO) extends UserService {
           avatarURL = profile.avatarURL
         ))
       case None => // Insert a new user
+        println( " UserServiceImpl.save2: " )
         userDAO.save(User(
           userID = UUID.randomUUID(),
           loginInfo = profile.loginInfo,

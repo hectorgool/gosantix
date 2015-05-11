@@ -68,6 +68,15 @@
                        required                       
                 />
 
+              <div role="alert">
+                <span class="error" ng-show="signupForm.email.$error.required">
+                  Required!
+                </span>
+                <span class="error" ng-show="signupForm.email.$error.email">
+                  Not valid email!
+                </span>
+              </div>
+
             </div>
 
             <div class="form-group">

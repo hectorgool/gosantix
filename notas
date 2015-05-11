@@ -68,3 +68,13 @@ app.controller 'ElasticSearchCtrl', [
 
     return
 ]
+
+
+//"com.typesafe.play"        % "play-slick_2.11"         % "0.8.1"
+
+
+{"name":"django", "descripcion":"esta es la descripcion", "slug":"este-es-el-slug"}
+
+
+
+curl -H "Content-Type: application/json" -X POST -d ' {"name":"django", "description":"esta es la descripcion", "slug":"este-es-el-slug","active":"true"} ' http://localhost:9000/item

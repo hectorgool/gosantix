@@ -15,7 +15,6 @@ libraryDependencies ++= Seq(
   anorm,
   cache,
   ws,
-  "mysql"                    % "mysql-connector-java"    % "5.1.18",
   "com.twitter"              % "finagle-core_2.11"       % "6.24.0",
   "com.twitter"              % "finagle-stream_2.11"     % "6.24.0",
   "com.twitter"              % "finagle-http_2.11"       % "6.24.0",
@@ -23,6 +22,10 @@ libraryDependencies ++= Seq(
   "net.liftweb"             %% "lift-json"               % "2.6",
   "com.mohiva"              %% "play-silhouette"         % "2.0",
   "net.codingwell"          %% "scala-guice"             % "4.0.0-beta5",
-  "com.twitter"              % "bijection-util_2.11"     % "0.7.2"
+  "com.twitter"              % "bijection-util_2.11"     % "0.7.2",
+  "mysql"                    % "mysql-connector-java"    % "5.1.18",
+  "com.typesafe.slick"       % "slick_2.11"              % "3.0.0",
+  "org.reactivemongo"       %% "play2-reactivemongo"     % "0.10.5.0.akka23",
+  "de.weltraumschaf"         % "speakingurl"             % "1.0.0"
 )
  

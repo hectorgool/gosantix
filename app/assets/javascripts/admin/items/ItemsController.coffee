@@ -1,26 +1,25 @@
-
 'use strict'
 
 dependencies = [
-  'elasticsearch.services'
+  'items.services'
 ]
 
-app = angular.module('elasticsearch.controller', dependencies)
+app = angular.module('items', dependencies)
 
-app.controller 'ElasticSearchCtrl', [
+app.controller 'ItemController', [
   '$scope'
-  'ElasticSearchQuery'
+  'ItemsPost'
   '$location'
 
-  ($scope, ElasticSearchQuery, $location) ->
+  ($scope, ItemsPost, $location) ->
 
-    $scope.onKeyUpSendTerm = ->
+    $scope.addItem = ->
 
       $scope.jsonTerm = 
         query: term: 'name.autocomplete': $('#term').val()
         facets: name: terms: field: 'name'    
 
-      ElasticSearchQuery.save {}, $scope.jsonTerm, ((response) ->
+      ItemsPost.save {}, $scope.jsonTerm, ((response) ->
         console.log 'Success:' + JSON.stringify(response)
         $scope.jsonResponse = response
         #$location.path '/'

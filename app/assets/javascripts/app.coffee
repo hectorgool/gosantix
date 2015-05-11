@@ -1,18 +1,29 @@
 'use strict'
-app = undefined
-dependencies = undefined
+
 dependencies = [
-  'ngResource'
   'ngRoute'
-  'elasticsearch'
+  'elasticsearch.controller'
   'auth'
 ]
+
 app = angular.module('myApp', dependencies)
+
 app.config ($routeProvider, $locationProvider) ->
+
   $routeProvider.when '/',
     templateUrl: '/assets/partials/index.html'
     controller: 'ElasticSearchCtrl'
-  $routeProvider.when '/signup', templateUrl: '/assets/partials/signup.html'
-  $routeProvider.when '/login', templateUrl: '/assets/partials/login.html'
-  $routeProvider.otherwise redirectTo: '/'
+
+  $routeProvider.when '/signup', 
+    templateUrl: '/assets/partials/signup.html'
+
+  $routeProvider.when '/login', 
+    templateUrl: '/assets/partials/login.html'
+
+  $routeProvider.when '/catalog', 
+    templateUrl: '/assets/partials/catalog.html'
+
+  $routeProvider.otherwise 
+    redirectTo: '/'
+
   return

@@ -44,7 +44,7 @@ class SignUpController @Inject() (
 
       val loginInfo = LoginInfo(CredentialsProvider.ID, data.email)
 
-      println( " --> data: " + data )//depurar
+      //println( "SignUpForm data: " + data )//depurar
 
       userService.retrieve(loginInfo).flatMap {
 
@@ -64,14 +64,14 @@ class SignUpController @Inject() (
             email = Some(data.email),
             avatarURL = None
           )
-
+          println( "user data: "  + user ) //depurar
           for {
 
             user <- userService.save(user)
             authInfo <- authInfoService.save(loginInfo, authInfo)
             authenticator <- env.authenticatorService.create(loginInfo)
             token <- env.authenticatorService.init(authenticator)
-
+            
           } yield {
 
             env.eventBus.publish(SignUpEvent(user, request, request2lang))

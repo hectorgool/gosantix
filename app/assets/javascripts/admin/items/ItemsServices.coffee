@@ -1,13 +1,12 @@
-
 'use strict'
 
 dependencies = [ 'ngResource' ]
-app = angular.module('elasticsearch.services', dependencies)
+app = angular.module('items.services', dependencies)
 
-app.factory 'ElasticSearchQuery', [
+app.factory 'ItemsQuery', [
   '$resource'
   ($resource) ->
-    $resource '/term', {},
+    $resource '/admin/items', {},
       get:
         method: 'GET'
         cache: false
@@ -18,10 +17,10 @@ app.factory 'ElasticSearchQuery', [
         isArray: false
 ]
 
-app.factory 'ElasticSearchPost', [
+app.factory 'ItemsPost', [
   '$resource'
   ($resource) ->
-    $resource '/term', {},
+    $resource '/admin/items', {},
       get:
         method: 'GET'
         cache: false
