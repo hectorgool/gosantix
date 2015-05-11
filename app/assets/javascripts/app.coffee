@@ -3,6 +3,7 @@
 dependencies = [
   'ngRoute'
   'elasticsearch.controller'
+  'items.controller'
   'auth'
 ]
 
@@ -22,6 +23,10 @@ app.config ($routeProvider, $locationProvider) ->
 
   $routeProvider.when '/catalog', 
     templateUrl: '/assets/partials/catalog.html'
+
+  $routeProvider.when '/create', 
+    templateUrl: '/assets/partials/admin/items/create.html'
+    controller: 'ItemController'
 
   $routeProvider.otherwise 
     redirectTo: '/'

@@ -78,3 +78,6 @@ app.controller 'ElasticSearchCtrl', [
 
 
 curl -H "Content-Type: application/json" -X POST -d ' {"name":"django", "description":"esta es la descripcion", "slug":"este-es-el-slug","active":"true"} ' http://localhost:9000/item
+
+slug
+https://github.com/paulsmith/angular-slugify

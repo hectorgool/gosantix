@@ -5,14 +5,14 @@
     <div class="col-md-6 col-md-offset-3">
 
         <h2>
-            Signup
+            Item
         </h2>
         
         <form role="form" 
               name="itemForm" 
               accept-charset="UTF-8" 
               autocomplete="off" 
-              ng-controller="createItemController"
+              ng-controller="ItemController"
               ng-submit="itemForm.$valid && addItem( )" 
               novalidate
         >
@@ -59,6 +59,10 @@
 
             <div>
               signupForm is: {{ signupForm.$valid }}
+            </div>
+
+            <div>
+              json: {{ jsonItem }}
             </div>
 
         </form>

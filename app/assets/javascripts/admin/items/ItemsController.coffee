@@ -2,24 +2,29 @@
 
 dependencies = [
   'items.services'
+  'slugifier'
 ]
 
-app = angular.module('items', dependencies)
+app = angular.module('items.controller', dependencies)
 
 app.controller 'ItemController', [
   '$scope'
   'ItemsPost'
   '$location'
+  'Slug'
 
-  ($scope, ItemsPost, $location) ->
+  ($scope, ItemsPost, $location, Slug) ->
+
+    $scope.jsonItem = {}
 
     $scope.addItem = ->
 
-      $scope.jsonTerm = 
-        query: term: 'name.autocomplete': $('#term').val()
-        facets: name: terms: field: 'name'    
+      $scope.jsonItem =
+        'name': $('#name').val()
+        'description': $('#description').val()
+        'slug': Slug.slugify( $('#name').val() )
 
-      ItemsPost.save {}, $scope.jsonTerm, ((response) ->
+      ItemsPost.save {}, $scope.jsonItem, ((response) ->
         console.log 'Success:' + JSON.stringify(response)
         $scope.jsonResponse = response
         #$location.path '/'
@@ -31,5 +36,9 @@ app.controller 'ItemController', [
       return
 
     return
+
+  #$scope.slugify = (input) ->
+    #$scope.mySlug = Slug.slugify(input)
+    #return  
 
 ]
