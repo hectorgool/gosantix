@@ -1,41 +1,27 @@
 package lib
 
 
-import com.twitter.finagle.ServiceFactory
-import org.jboss.netty.handler.codec.http._
-//import com.twitter.finagle.builder.ClientBuilder
-//import com.twitter.finagle.http.Http
-import com.twitter.finagle.{Http, Service}
-import com.twitter.conversions.time._
-import org.jboss.netty.buffer.ChannelBuffers
-import org.jboss.netty.util.CharsetUtil._
-import org.jboss.netty.handler.codec.http.HttpHeaders.Names._
-import org.jboss.netty.util.CharsetUtil
-import com.twitter.util.Future
 import play.api.Logger
 import play.api.libs.json.Json
 import play.api.libs.json.JsValue
 import play.api.Play.current
+import org.jboss.netty.buffer.ChannelBuffers
+import org.jboss.netty.handler.codec.http._
+import org.jboss.netty.handler.codec.http.HttpHeaders.Names._
+import org.jboss.netty.util.CharsetUtil
+import org.jboss.netty.util.CharsetUtil._
+import com.twitter.util.Future
+import com.twitter.finagle.{Http, Service}
 
 
 object FinagleClient{
 
 
-  //val hosts= "localhost:9200"
   val hosts = current.configuration.getString("elasticsearch.hosts").get
 
   /**
    * You init a clientFactory only once and use it several times across your application
    */
-  /* 
-  val clientFactory: ServiceFactory[HttpRequest, HttpResponse] = ClientBuilder()
-    .codec(Http())
-    .hosts(hosts)
-    .tcpConnectTimeout(1.second)
-    .hostConnectionLimit(1)
-    .buildFactory()
-  */  
-
   val client: Service[HttpRequest, HttpResponse] = Http.newService(hosts)    
 
   /**
@@ -109,17 +95,15 @@ object FinagleClient{
    * @return
    */
   def sendToElastic(request: DefaultHttpRequest): Future[HttpResponse] ={
-    //val client = clientFactory.apply()()
+    
     Logger.debug("Request to send is %s" format request)
     val httpResponse = client(request)
 
     httpResponse.onSuccess{
       response =>
         Logger.debug("Received response: " + response)
-        //client.close()
     }.onFailure{ err: Throwable =>
         Logger.error(err.toString)      
-        //client.close()
     }
   }
 
