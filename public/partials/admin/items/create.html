@@ -23,14 +23,28 @@
                     Name
                 </label>
 
+                <div role="alert">
+                  <span class="error" ng-show="itemForm.name.$dirty && itemForm.name.$error.required">
+                    Required!
+                  </span>
+                  <span class="error" ng-show="itemForm.name.$dirty && itemForm.name.$error.maxlength">
+                    Max Length!
+                  </span>
+                  <span class="error" ng-show="itemForm.name.$dirty && itemForm.name.$invalid">
+                    This field is invalid
+                  </span>
+                </div>
+
                 <input id="name" 
-                       name="name" 
-                       placeholder="Name"  
-                	     autofocus="autofocus" 
-                       autocomplete="off" 
-                       class="form-control input-lg" 
-                       ng-model="item.name" 
-                       required
+                  name="name" 
+                  placeholder="Name"  
+                	autofocus="autofocus" 
+                  autocomplete="off" 
+                  class="form-control input-lg" 
+                  ng-model="item.name" 
+                  ng-minlength="4" 
+                  ng-maxlength="65" 
+                  required
                 />
                 <slug from="item.name" to="item.slug"></slug><!--create slug name-->
 
@@ -42,12 +56,19 @@
                     Sku
                 </label>
 
+                <div role="alert">
+                  <span class="error" ng-show="itemForm.sku.$dirty && itemForm.sku.$error.maxlength">
+                    Max Length!
+                  </span>
+                </div>
+
                 <input id="sku" 
                        name="sku" 
                        placeholder="Sku"  
                        autocomplete="off" 
                        class="form-control input-lg" 
                        ng-model="item.sku" 
+                       ng-maxlength="8" 
                 />
                 <slug from="item.name" to="item.slug"></slug><!--create slug name-->
 
@@ -59,11 +80,22 @@
                     Description
                 </label>
 
+                <div role="alert">
+                  <span class="error" ng-show="itemForm.description.$dirty && itemForm.description.$error.required">
+                    Required!
+                  </span>
+                  <span class="error" ng-show="itemForm.description.$dirty && itemForm.description.$error.maxlength">
+                    Max Length!
+                  </span>
+                </div>
+
                 <textarea class="form-control" rows="3"
                   id="description" 
                   name="description" 
                   placeholder="Description" 
                   ng-model="item.description" 
+                  ng-minlength="4" 
+                  ng-maxlength="65" 
                   required
                 >       
                 </textarea>
@@ -78,12 +110,27 @@
             </div>    
                      
             <button type="submit"  class="btn btn-lg btn-white btn-block">
-                Create Item
+              Create Item
             </button>
+
+            <!--
+            <hr>
+            <tt>item = {{item}}</tt><br/>
+
+            <tt>itemForm.name.$valid = {{itemForm.name.$valid}}</tt><br/>
+            <tt>itemForm.name.$error = {{itemForm.name.$error}}</tt><br/>
+            <tt>itemForm.description.$valid = {{itemForm.description.$valid}}</tt><br/>
+            <tt>itemForm.description.$error = {{itemForm.description.$error}}</tt><br/>
+
+            <tt>itemForm.$valid = {{itemForm.$valid}}</tt><br/>
+            <tt>itemForm.$error.required = {{!!itemForm.$error.required}}</tt><br/>
+            <tt>itemForm.$error.minlength = {{!!itemForm.$error.minlength}}</tt><br/>
+            <tt>itemForm.$error.maxlength = {{!!itemForm.$error.maxlength}}</tt><br/>
 
             <div>
               itemForm is: {{ itemForm.$valid }}
             </div>
+            -->
 
         </form>
 
