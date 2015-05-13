@@ -2,13 +2,11 @@ package models
 
 
 case class Item( 
-	//age: Int,
-    //firstName: String,
-    //lastName: String,
-    name: String,
-    description: String,
-    slug: String,
-    active: Boolean
+  name: String,
+  slug: String,
+  sku: String,
+  description: String,    
+  active: Boolean
 )
 
 
