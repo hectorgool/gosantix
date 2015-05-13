@@ -15,9 +15,7 @@ app.controller 'ItemController', [
 
   ($scope, ItemsPost, $location, Slug) ->
 
-    $scope.item =
-      'name'       : $('#name').val()
-      'description': $('#description').val()      
+    $scope.item = {}
 
     $scope.addItem = ->
       console.log 'item: ' + JSON.stringify($scope.item)      

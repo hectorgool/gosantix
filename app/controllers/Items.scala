@@ -67,8 +67,10 @@ object Items extends Controller with MongoController {
      */
     val transformer: Reads[JsObject] =
       Reads.jsPickBranch[JsString](__ \ "name") and
+      Reads.jsPickBranch[JsString](__ \ "slug") and
+      Reads.jsPickBranch[JsString](__ \ "sku") and
       Reads.jsPickBranch[JsString](__ \ "description") and
-      Reads.jsPickBranch[JsString](__ \ "slug") reduce
+      Reads.jsPickBranch[JsBoolean](__ \ "active") reduce
 
     println(transformer)
 

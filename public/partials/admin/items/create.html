@@ -38,19 +38,35 @@
 
             <div class="form-group">
 
+                <label for="sku">
+                    Sku
+                </label>
+
+                <input id="sku" 
+                       name="sku" 
+                       placeholder="Sku"  
+                       autocomplete="off" 
+                       class="form-control input-lg" 
+                       ng-model="item.sku" 
+                />
+                <slug from="item.name" to="item.slug"></slug><!--create slug name-->
+
+            </div>
+
+            <div class="form-group">
+
                 <label for="description">
                     Description
                 </label>
 
-                <input id="description" 
-                       name="description" 
-                       placeholder="Description" 
-                       autofocus="autofocus"
-                       autocomplete="off" 
-                       class="form-control input-lg"
-                       ng-model="item.description" 
-                       required
-                />
+                <textarea class="form-control" rows="3"
+                  id="description" 
+                  name="description" 
+                  placeholder="Description" 
+                  ng-model="item.description" 
+                  required
+                >       
+                </textarea>
 
             </div>        
 
