@@ -5,7 +5,7 @@
     <div class="col-md-6 col-md-offset-3">
 
         <h2>
-            Item
+            Tutorial Angular 2 of 3
         </h2>
         
         <form role="form" 
@@ -32,6 +32,7 @@
                        ng-model="item.name" 
                        required
                 />
+                <slug from="item.name" to="item.slug"></slug><!--create slug name-->
 
             </div>
 
@@ -51,18 +52,21 @@
                        required
                 />
 
-            </div>
+            </div>        
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="active" name="active" ng-model="item.active" checked>
+                <strong>Active</strong>
+              </label>
+            </div>    
                      
             <button type="submit"  class="btn btn-lg btn-white btn-block">
                 Create Item
             </button>
 
             <div>
-              signupForm is: {{ signupForm.$valid }}
-            </div>
-
-            <div>
-              json: {{ jsonItem }}
+              itemForm is: {{ itemForm.$valid }}
             </div>
 
         </form>

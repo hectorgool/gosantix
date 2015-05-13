@@ -4,23 +4,39 @@ if (window.console) {
 }
 */
 
-(function(){
+(function() {
 
+  'use strict';
+  var app, dependencies;
 
-  'use  strict';
-  
-  var app = angular.module( 'signupServices',  ['ngResource'] );
+  dependencies = ['items.services','slugifier'];
 
-  app.factory('SignUpQuery', ['$resource', function( $resource ){
+  app = angular.module('items.controller', dependencies);
 
-    return $resource("/auth/signup", {}, {
-      get:    {method:  'GET',    cache:  false,  isArray:  false},
-      save:   {method:  'POST',   cache:  false,  isArray:  false},
-      update: {method:  'PUT',    cache:  false,  isArray:  false},
-      delete: {method:  'DELETE', cache:  false,  isArray:  false}
-    });
+  app.controller('ItemController', [
 
-  }]);
+    '$scope', 'ItemsPost', '$location', function($scope, ItemsPost, $location) {
 
+      $scope.addItem = function() {
 
-})();
+        $scope.jsonItem = {
+          name:         $('#name').val(),
+          description:  $('#description').val(),
+        };
+
+        $console.log('$scope.jsonItem' + $scope.jsonItem);
+
+        ItemsPost.save({}, $scope.jsonItem, (function(response) {
+          console.log('Success:' + JSON.stringify(response));
+          $scope.jsonResponse = response;
+        }), function(errorResponse) {
+          console.log('Error:' + JSON.stringify(errorResponse));
+        });
+
+      };
+
+    }
+
+  ]);
+
+}).call(this);

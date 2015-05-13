@@ -15,30 +15,23 @@ app.controller 'ItemController', [
 
   ($scope, ItemsPost, $location, Slug) ->
 
-    $scope.jsonItem = {}
+    $scope.item =
+      'name'       : $('#name').val()
+      'description': $('#description').val()      
 
     $scope.addItem = ->
-
-      $scope.jsonItem =
-        'name': $('#name').val()
-        'description': $('#description').val()
-        'slug': Slug.slugify( $('#name').val() )
-
-      ItemsPost.save {}, $scope.jsonItem, ((response) ->
-        console.log 'Success:' + JSON.stringify(response)
-        $scope.jsonResponse = response
-        #$location.path '/'
-        return
-      ), (errorResponse) ->
-        console.log 'Error:' + JSON.stringify(errorResponse)
-        return
-
+      console.log 'item: ' + JSON.stringify($scope.item)      
+      ItemsPost.save {}, $scope.item, (
+        (response) ->
+          console.log 'Success:' + JSON.stringify(response)
+          $scope.item = response
+          $scope.item = {};
+          return
+      ),(errorResponse) ->
+          console.log 'Error:' + JSON.stringify(errorResponse)
+          return
       return
 
     return
-
-  #$scope.slugify = (input) ->
-    #$scope.mySlug = Slug.slugify(input)
-    #return  
 
 ]

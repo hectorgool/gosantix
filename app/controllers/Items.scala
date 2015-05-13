@@ -70,6 +70,8 @@ object Items extends Controller with MongoController {
       Reads.jsPickBranch[JsString](__ \ "description") and
       Reads.jsPickBranch[JsString](__ \ "slug") reduce
 
+    println(transformer)
+
     request.body.transform(transformer).map { result =>
       collection.insert(result).map { lastError =>
         Logger.debug(s"Successfully inserted with LastError: $lastError")
