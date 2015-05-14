@@ -21,8 +21,11 @@ app.config ($routeProvider, $locationProvider) ->
   $routeProvider.when '/login', 
     templateUrl: '/assets/partials/login.html'
 
-  $routeProvider.when '/catalog', 
+  $routeProvider.when '/catalog/:catalog',
     templateUrl: '/assets/partials/catalog.html'
+
+  $routeProvider.when '/catalog/:catalog/item/:item',
+    templateUrl: '/assets/partials/catalog_item.html'
 
   $routeProvider.when '/create', 
     templateUrl: '/assets/partials/admin/items/create.html'
