@@ -5,6 +5,7 @@ dependencies = [
   'elasticsearch.controller'
   'items.controller'
   'auth'
+  'translate'
 ]
 
 app = angular.module('myApp', dependencies)

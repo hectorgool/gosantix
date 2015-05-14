@@ -1,64 +1,53 @@
-
-<!--search-->
-<!--
-<div id="row">
-  <div class="col-md-12">
-  -->  
     
-    <form>
+<form>
 
-      <div ng-controller="ElasticSearchCtrl">
+  <h1>
+    AngularJS by Example
+  </h1>
 
-        <div class="input-group">
-          <input id="term" 
-            class="form-control input-lg" 
-            ng-keyup="onKeyUpSendTerm()" 
-            type="text" 
-            placeholder="Search items" 
-            autocomplete="off"
-          >
+  <div class="input-group">
+    <input id="term" 
+      class="form-control input-lg" 
+      ng-keyup="onKeyUpSendTerm()" 
+      type="text" 
+      placeholder="Search items" 
+      autocomplete="off"
+    >
 
-          <span class="input-group-addon btn-white">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 
-            <span ng-if="jsonResponse.hits.total > 0">Hits: {{ jsonResponse.hits.total }}</span> 
-          </span>
+    <span class="input-group-addon btn-white">
+      <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 
+      <span ng-if="jsonResponse.hits.total > 0"> {{ jsonResponse.hits.total }} Results</span> 
+    </span>
 
-        </div> 
+  </div> 
 
-        <pre> {{ jsonTerm | json }}</pre>
-        <!--<pre> Hits: {{ jsonResponse.hits.total }}</pre>-->
+  <!--debug-->
+  <!--<pre> {{ jsonTerm | json }}</pre>-->
+  <!--<pre> Hits: {{ jsonResponse.hits.total }}</pre>-->
 
-        <div ng-repeat="obj in jsonResponse.hits.hits">
-          <div class="row">
-            <div class="col-md-12">
-              <h3>
-                <a class="link" href="http://localhost:9000/{{obj._source.slug}}">
-                  <span ng-bind="obj._source.name"></span>
-                </a> <small>by</small> 
-                <a class="username" href="http://localhost:9000/{{obj._source.slug}}">
-                  <span ng-bind="obj._source.username"></span>
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="description">
-                <span ng-bind="obj._source.description"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!--<pre> {{ jsonResponse |json }}</pre>-->
-
+  <div ng-repeat="obj in jsonResponse.hits.hits">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>
+          <a class="link" href="http://localhost:9000/{{obj._source.slug}}">
+            <span ng-bind="obj._source.name"></span>
+          </a> <small>by</small> 
+          <a class="username" href="http://localhost:9000/{{obj._source.slug}}">
+            <span ng-bind="obj._source.username"></span>
+          </a>
+        </h3>
       </div>
+    </div>
 
-    </form>
-    
-   <!-- 
+    <div class="row">
+      <div class="col-md-12">
+        <div class="description">
+          <span ng-bind="obj._source.description"></span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
--->
-<!--end:search-->
+
+  <!--<pre> {{ jsonResponse |json }}</pre>-->
+
+</form>
