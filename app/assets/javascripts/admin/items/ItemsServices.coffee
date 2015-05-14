@@ -24,7 +24,7 @@ app.factory 'ItemsPost', [
       get:
         method: 'GET'
         cache: false
-        isArray: false
+        isArray: true
       save:
         method: 'POST'
         cache: false

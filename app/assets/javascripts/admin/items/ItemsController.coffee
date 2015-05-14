@@ -1,11 +1,14 @@
 'use strict'
 
+
 dependencies = [
   'items.services'
   'slugifier'
 ]
 
+
 app = angular.module('items.controller', dependencies)
+
 
 app.controller 'ItemController', [
   '$scope'
@@ -33,3 +36,42 @@ app.controller 'ItemController', [
     return
 
 ]
+
+app.controller 'ItemsController', [
+  '$scope'
+  'ItemsPost'
+
+  ($scope, ItemsPost) ->
+
+    $scope.itemList = []
+
+    ItemsPost.get {}, ((response) ->
+      console.log 'Success:' + JSON.stringify(response)
+      $scope.itemList = response
+      return
+    ), (errorResponse) ->
+      console.log 'Error:' + JSON.stringify(errorResponse)
+      return
+    return
+]
+
+
+'''
+app.controller 'ItemsController', [
+  '$scope'
+  'ItemsPost'
+
+  ($scope, ItemsPost) ->
+
+    $scope.itemList = []
+
+    ItemsPost.get { active: 'true' }, ((response) ->
+      console.log 'Success:' + JSON.stringify(response)
+      $scope.itemList = response
+      return
+    ), (errorResponse) ->
+      console.log 'Error:' + JSON.stringify(errorResponse)
+      return
+    return
+]
+'''

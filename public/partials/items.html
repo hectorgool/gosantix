@@ -1,0 +1,24 @@
+
+<h1>
+	AngularJS by Example
+</h1>
+
+items
+
+<p>
+	<dl ng-repeat="item in itemList[0]">
+		<dt>
+			<a href="#/item/{{item.slug}}">{{ item.name }}</a>
+		</dt>
+		<dd>
+			{{ item.description }}
+		</dd>
+	</dl>
+</p>
+
+<!--
+<pre>
+	{{ itemList| json }}
+</pre>	
+-->
+

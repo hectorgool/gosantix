@@ -28,9 +28,9 @@ app.config ($routeProvider, $locationProvider) ->
   $routeProvider.when '/catalog/:catalog/item/:item',
     templateUrl: '/assets/partials/catalog_item.html'
 
-  $routeProvider.when '/create', 
-    templateUrl: '/assets/partials/admin/items/create.html'
-    controller: 'ItemController'
+  $routeProvider.when '/items', 
+    templateUrl: '/assets/partials/items.html'
+    controller: 'ItemsController'
 
   $routeProvider.otherwise 
     redirectTo: '/'

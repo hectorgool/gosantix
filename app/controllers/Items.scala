@@ -83,27 +83,53 @@ object Items extends Controller with MongoController {
 
   }
 
-  def findByName(name: String) = Action.async {
+  def findByActive( active: Boolean ) = Action.async {
     // let's do our query
     val cursor: Cursor[JsObject] = collection.
       // find all people with name `name`
-      find(Json.obj("name" -> name)).
+      find(Json.obj("active" -> active)).
       // sort them by creation date
-      sort(Json.obj("created" -> -1)).
+      //sort(Json.obj("created" -> -1)).
       // perform the query and get a cursor of JsObject
       cursor[JsObject]
 
     // gather all the JsObjects in a list
-    val futurePersonsList: Future[List[JsObject]] = cursor.collect[List]()
+    val futureItemsList: Future[List[JsObject]] = cursor.collect[List]()
 
     // transform the list into a JsArray
-    val futurePersonsJsonArray: Future[JsArray] = futurePersonsList.map { persons =>
-      Json.arr(persons)
+    val futureItemsJsonArray: Future[JsArray] = futureItemsList.map { items =>
+      Json.arr( items )
     }
 
     // everything's ok! Let's reply with the array
-    futurePersonsJsonArray.map { persons =>
-      Ok(persons)
+    futureItemsJsonArray.map { items =>
+      Ok( items )
     }
   }
+
+  def findAllItems = Action.async {
+    // let's do our query
+    val cursor: Cursor[JsObject] = collection.
+      // find all people with name `name`
+      find(Json.obj("active" -> true)).
+      // sort them by creation date
+      //sort(Json.obj("created" -> -1)).
+      // perform the query and get a cursor of JsObject
+      cursor[JsObject]
+
+    // gather all the JsObjects in a list
+    val futureItemsList: Future[List[JsObject]] = cursor.collect[List]()
+
+    // transform the list into a JsArray
+    val futureItemsJsonArray: Future[JsArray] = futureItemsList.map { items =>
+      Json.arr( items )
+    }
+
+    // everything's ok! Let's reply with the array
+    futureItemsJsonArray.map { items =>
+      Ok( items )
+    }
+  }
+
+
 }

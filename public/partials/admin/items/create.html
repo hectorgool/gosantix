@@ -95,7 +95,7 @@
                   placeholder="Description" 
                   ng-model="item.description" 
                   ng-minlength="4" 
-                  ng-maxlength="65" 
+                  ng-maxlength="500" 
                   required
                 >       
                 </textarea>
@@ -115,7 +115,11 @@
 
             <!--
             <hr>
-            <tt>item = {{item}}</tt><br/>
+            <pre>item = {{item |json }}</pre>
+
+            <pre>
+              itemForm is: {{ itemForm.$valid }}
+            </pre>
 
             <tt>itemForm.name.$valid = {{itemForm.name.$valid}}</tt><br/>
             <tt>itemForm.name.$error = {{itemForm.name.$error}}</tt><br/>
@@ -126,12 +130,8 @@
             <tt>itemForm.$error.required = {{!!itemForm.$error.required}}</tt><br/>
             <tt>itemForm.$error.minlength = {{!!itemForm.$error.minlength}}</tt><br/>
             <tt>itemForm.$error.maxlength = {{!!itemForm.$error.maxlength}}</tt><br/>
-
-            <div>
-              itemForm is: {{ itemForm.$valid }}
-            </div>
             -->
-
+            
         </form>
 
     </div>

@@ -81,3 +81,23 @@ curl -H "Content-Type: application/json" -X POST -d ' {"name":"django", "descrip
 
 slug
 https://github.com/paulsmith/angular-slugify
+
+
+http://stackoverflow.com/questions/29412456/insert-nested-document-using-reactivemongo-play-framework-and-scala
+
+boolean parametros in routes
+http://stackoverflow.com/questions/13633089/pass-parameter-value-in-routes
+
+
+http://stackoverflow.com/questions/20041306/error-resourcebadcfg-error-in-resource-configuration-expected-response-to
+
+      get:
+        method: 'GET'
+        cache: false
+        isArray: false
+
+
+      get:
+        method: 'GET'
+        cache: false
+        isArray: true

@@ -4,7 +4,6 @@
 
 # Home page
 GET     /                                     controllers.Application.index
-#GET         /                                com.tuplejump.playYeoman.Yeoman.index
 
 #silouette
 GET         /user                            @controllers.ApplicationController.user
@@ -14,13 +13,13 @@ POST        /auth/signup                     @controllers.SignUpController.signU
 GET         /authenticate/:provider          @controllers.SocialAuthController.authenticate(provider)
 POST        /authenticate/:provider          @controllers.SocialAuthController.authenticate(provider)
 
-# Dynamic part of the url
-#GET         /views/$template<.+>.html        @controllers.ApplicationController.view(template)
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                    controllers.Assets.at(path="/public", file)
 
 #santo
 POST        /term                            controllers.ElasticSearch.term
-
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
 POST        /admin/items                     controllers.Items.createFromJson
+#GET         /admin/items:active              controllers.Items.findByActive( active: Boolean )
+
+GET         /admin/items                     controllers.Items.findAllItems
