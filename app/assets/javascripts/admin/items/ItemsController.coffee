@@ -54,24 +54,3 @@ app.controller 'ItemsController', [
       return
     return
 ]
-
-
-'''
-app.controller 'ItemsController', [
-  '$scope'
-  'ItemsPost'
-
-  ($scope, ItemsPost) ->
-
-    $scope.itemList = []
-
-    ItemsPost.get { active: 'true' }, ((response) ->
-      console.log 'Success:' + JSON.stringify(response)
-      $scope.itemList = response
-      return
-    ), (errorResponse) ->
-      console.log 'Error:' + JSON.stringify(errorResponse)
-      return
-    return
-]
-'''

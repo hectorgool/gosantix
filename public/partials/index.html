@@ -1,10 +1,9 @@
     
+<h1>
+  AngularJS by Example
+</h1>
+
 <form>
-
-  <h1>
-    AngularJS by Example
-  </h1>
-
   <div class="input-group">
     <input id="term" 
       class="form-control input-lg" 
@@ -19,35 +18,34 @@
       <span ng-if="jsonResponse.hits.total > 0"> {{ jsonResponse.hits.total }} Results</span> 
     </span>
 
-  </div> 
+  </div>
+</form>
 
-  <!--debug-->
-  <!--<pre> {{ jsonTerm | json }}</pre>-->
-  <!--<pre> Hits: {{ jsonResponse.hits.total }}</pre>-->
+<!--debug-->
+<!--<pre> {{ jsonTerm | json }}</pre>-->
+<!--<pre> Hits: {{ jsonResponse.hits.total }}</pre>-->
 
-  <div ng-repeat="obj in jsonResponse.hits.hits">
-    <div class="row">
-      <div class="col-md-12">
-        <h3>
-          <a class="link" href="http://localhost:9000/{{obj._source.slug}}">
-            <span ng-bind="obj._source.name"></span>
-          </a> <small>by</small> 
-          <a class="username" href="http://localhost:9000/{{obj._source.slug}}">
-            <span ng-bind="obj._source.username"></span>
-          </a>
-        </h3>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="description">
-          <span ng-bind="obj._source.description"></span>
-        </div>
-      </div>
+<div ng-repeat="obj in jsonResponse.hits.hits">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>
+        <a class="link" href="http://localhost:9000/{{obj._source.slug}}">
+          <span ng-bind="obj._source.name"></span>
+        </a> <small>by</small> 
+        <a class="username" href="http://localhost:9000/{{obj._source.slug}}">
+          <span ng-bind="obj._source.username"></span>
+        </a>
+      </h3>
     </div>
   </div>
 
-  <!--<pre> {{ jsonResponse |json }}</pre>-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="description">
+        <span ng-bind="obj._source.description"></span>
+      </div>
+    </div>
+  </div>
+</div>
 
-</form>
+  <!--<pre> {{ jsonResponse |json }}</pre>-->

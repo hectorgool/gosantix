@@ -101,3 +101,8 @@ http://stackoverflow.com/questions/20041306/error-resourcebadcfg-error-in-resour
         method: 'GET'
         cache: false
         isArray: true
+
+ng-controller="expression"        
+
+
+http://stackoverflow.com/questions/21310734/angular-js-ng-include-expression
