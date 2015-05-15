@@ -8,7 +8,7 @@ dependencies = [
   'translate'
 ]
 
-app = angular.module('myApp', dependencies)
+app = angular.module('SANTO', dependencies)
 
 app.config ($routeProvider, $locationProvider) ->
 
