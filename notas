@@ -106,3 +106,14 @@ ng-controller="expression"
 
 
 http://stackoverflow.com/questions/21310734/angular-js-ng-include-expression
+
+http://stackoverflow.com/questions/17126980/play-reactivemongo-exception-when-trying-to-find-one-document
+
+
+curl -H "Content-Type: application/json" -X GET -d http://localhost:9000/admin/item:55551267a71fc5d928d40afd
+
+
+curl http://localhost:9000/admin/item/angularjs-by-example -u slug:angularjs-by-example
+
+
+curl http://localhost:9000/admin/item/id/55551267a71fc5d928d40afd -u _id:55551267a71fc5d928d40afd

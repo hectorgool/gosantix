@@ -131,5 +131,25 @@ object Items extends Controller with MongoController {
     }
   }
 
+  def getBySlug( slug: String ) = Action.async(parse.anyContent) { request =>
+    val futureResults = collection.find(Json.obj( "slug" -> slug )).one[JsValue]
+    futureResults.map {
+      case Some(item) => 
+        Ok(Json.toJson(item))
+      case None => 
+        NotFound( Json.obj("message" -> "No such slug for item") )      
+    }
+  }
+
+  def getById(id: String) = Action.async(parse.anyContent) { request =>
+    val futureResults = collection.find(Json.obj("_id" -> Json.obj("$oid" -> id))).one[JsValue]
+    futureResults.map {
+      case Some(item) => 
+        Ok(Json.toJson(item))
+      case None => 
+        NotFound( Json.obj("message" -> "No such id for item") )
+    }
+  }
+
 
 }

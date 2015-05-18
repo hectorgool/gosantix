@@ -20,11 +20,11 @@ app.factory 'ItemsQuery', [
 app.factory 'ItemsPost', [
   '$resource'
   ($resource) ->
-    $resource '/admin/items', {},
+    $resource '/admin/item/:id', {},
       get:
         method: 'GET'
         cache: false
-        isArray: true
+        isArray: false
       save:
         method: 'POST'
         cache: false

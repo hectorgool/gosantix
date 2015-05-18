@@ -40,6 +40,10 @@ app.config ($routeProvider, $locationProvider) ->
     templateUrl: '/assets/partials/admin/items/list.html'
     controller: 'ItemsController'
 
+  $routeProvider.when '/item/:id', 
+    templateUrl: '/assets/partials/admin/items/id.html'
+    controller: 'ItemViewController'
+
   $routeProvider.otherwise 
     redirectTo: '/'
 

@@ -19,7 +19,11 @@ GET         /assets/*file                    controllers.Assets.at(path="/public
 
 #santo
 POST        /term                            controllers.ElasticSearch.term
-POST        /admin/items                     controllers.Items.createFromJson
-#GET         /admin/items:active              controllers.Items.findByActive( active: Boolean )
+#POST        /admin/items                     controllers.Items.createFromJson
+POST        /admin/item                     controllers.Items.createFromJson
+#GET         /admin/items/:active             controllers.Items.findByActive( active: Boolean )
+#GET         /admin/item/:active             controllers.Items.findByActive( active: Boolean )
 
 GET         /admin/items                     controllers.Items.findAllItems
+#GET         /admin/item/:slug                controllers.Items.getBySlug( slug: String )
+GET         /admin/item/:id                  controllers.Items.getById( id: String )

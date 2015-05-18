@@ -25,7 +25,6 @@ libraryDependencies ++= Seq(
   "com.twitter"              % "bijection-util_2.11"     % "0.7.2",
   "mysql"                    % "mysql-connector-java"    % "5.1.18",
   "com.typesafe.slick"       % "slick_2.11"              % "3.0.0",
-  "org.reactivemongo"       %% "play2-reactivemongo"     % "0.10.5.0.akka23",
-  "de.weltraumschaf"         % "speakingurl"             % "1.0.0"
+  "org.reactivemongo"       %% "play2-reactivemongo"     % "0.10.5.0.akka23"
 )
  

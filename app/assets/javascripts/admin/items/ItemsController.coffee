@@ -39,15 +39,33 @@ app.controller 'ItemController', [
 
 app.controller 'ItemsController', [
   '$scope'
-  'ItemsPost'
+  'ItemsQuery'
 
-  ($scope, ItemsPost) ->
+  ($scope, ItemsQuery) ->
 
     $scope.itemList = []
 
-    ItemsPost.get {}, ((response) ->
+    ItemsQuery.get {}, ((response) ->
       console.log 'Success:' + JSON.stringify(response)
       $scope.itemList = response
+      return
+    ), (errorResponse) ->
+      console.log 'Error:' + JSON.stringify(errorResponse)
+      return
+    return
+]
+
+app.controller 'ItemViewController', [
+  '$scope'
+  '$routeParams'
+  'ItemsPost'
+  ($scope, $routeParams, ItemsPost) ->
+    itemId = $routeParams.id
+    #$scope.blg = 1
+    console.log 'itemId: ' + itemId
+    ItemsPost.get { id: itemId }, ((response) ->
+      console.log 'Success:' + JSON.stringify(response)
+      $scope.itemDocument = response
       return
     ), (errorResponse) ->
       console.log 'Error:' + JSON.stringify(errorResponse)
