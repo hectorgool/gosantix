@@ -17,7 +17,8 @@ app.factory 'ItemsQuery', [
         isArray: false
 ]
 
-app.factory 'ItemsPost', [
+#app.factory 'ItemsPost', [
+app.factory 'ItemsCRUD', [
   '$resource'
   ($resource) ->
     $resource '/admin/item/:id', {},

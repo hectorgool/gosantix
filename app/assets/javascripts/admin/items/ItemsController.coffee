@@ -9,20 +9,19 @@ dependencies = [
 
 app = angular.module('items.controller', dependencies)
 
-
-app.controller 'ItemController', [
+app.controller 'ItemsCreateController', [
   '$scope'
-  'ItemsPost'
+  'ItemsCRUD'
   '$location'
   'Slug'
 
-  ($scope, ItemsPost, $location, Slug) ->
+  ($scope, ItemsCRUD, $location, Slug) ->
 
     $scope.item = {}
 
     $scope.addItem = ->
       console.log 'item: ' + JSON.stringify($scope.item)      
-      ItemsPost.save {}, $scope.item, (
+      ItemsCRUD.save {}, $scope.item, (
         (response) ->
           console.log 'Success:' + JSON.stringify(response)
           $scope.item = response
@@ -38,7 +37,7 @@ app.controller 'ItemController', [
 
 ]
 
-app.controller 'ItemsController', [
+app.controller 'ItemsListController', [
 
   '$scope'
   'ItemsQuery'
@@ -55,28 +54,37 @@ app.controller 'ItemsController', [
       console.log 'Error:' + JSON.stringify(errorResponse)
       return
 
-    $scope.removeTask = ( taskId ) ->
-      alert 'Task Id is ' + taskId
-      return
-
     return
 
 ]
 
-app.controller 'ItemViewController', [
+app.controller 'ItemsViewController', [
   '$scope'
   '$routeParams'
-  'ItemsPost'
-  ($scope, $routeParams, ItemsPost) ->
+  'ItemsCRUD'
+  ($scope, $routeParams, ItemsCRUD) ->
     itemId = $routeParams.id
     #$scope.blg = 1
     console.log 'itemId: ' + itemId
-    ItemsPost.get { id: itemId }, ((response) ->
+    ItemsCRUD.get { id: itemId }, ((response) ->
       console.log 'Success:' + JSON.stringify(response)
       $scope.itemDocument = response
       return
     ), (errorResponse) ->
       console.log 'Error:' + JSON.stringify(errorResponse)
       return
+    return
+]
+
+app.controller 'ItemsDeleteController', [
+  '$scope'
+  '$routeParams'
+  'ItemsCRUD'
+  ($scope, $routeParams, ItemsCRUD) ->
+
+    $scope.removeItem = ( itemId ) ->
+      console.log 'Item Id is ' + itemId
+      return
+
     return
 ]
