@@ -27,6 +27,7 @@ app.controller 'ItemController', [
           console.log 'Success:' + JSON.stringify(response)
           $scope.item = response
           $scope.item = {};
+          $location.path '/admin/list'
           return
       ),(errorResponse) ->
           console.log 'Error:' + JSON.stringify(errorResponse)
@@ -38,6 +39,7 @@ app.controller 'ItemController', [
 ]
 
 app.controller 'ItemsController', [
+
   '$scope'
   'ItemsQuery'
 
@@ -52,7 +54,13 @@ app.controller 'ItemsController', [
     ), (errorResponse) ->
       console.log 'Error:' + JSON.stringify(errorResponse)
       return
+
+    $scope.removeTask = ( taskId ) ->
+      alert 'Task Id is ' + taskId
+      return
+
     return
+
 ]
 
 app.controller 'ItemViewController', [

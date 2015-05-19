@@ -1,8 +1,8 @@
 
 <h1>
-	<button class="btn btn-default" type="submit">
+	<a href="#/create" class="btn btn-default btn-lg active" role="button">
 		<span class="glyphicon glyphicon-plus btn-lg" aria-hidden="true"></span> 	
-	</button>
+	</a>
 	Items
 </h1>
 
@@ -29,7 +29,7 @@
 			</td>
 
 			<td>
-				<button class="btn btn-default" type="submit"> 
+				<button class="btn btn-default" ng-click="removeTask( item._id.$oid );"> 
 					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
 					Delete
 				</button>
