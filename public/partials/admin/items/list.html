@@ -28,8 +28,8 @@
 				</button>
 			</td>
 
-			<td>
-				<button class="btn btn-default" ng-click="removeTask( item._id.$oid );"> 
+			<td ng-controller="ItemsDeleteController">
+				<button class="btn btn-default" ng-click="removeItem( item._id.$oid );"> 
 					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
 					Delete
 				</button>
