@@ -9,15 +9,20 @@ dependencies = [
 
 app = angular.module('items.controller', dependencies)
 
-app.controller 'ItemsCreateController', [
+app.controller 'ItemsController', [
+
   '$scope'
   'ItemsCRUD'
   '$location'
   'Slug'
+  'ItemsQuery'
 
-  ($scope, ItemsCRUD, $location, Slug) ->
+  ($scope, ItemsCRUD, $location, Slug, ItemsQuery) ->
+
 
     $scope.item = {}
+
+    $scope.itemList = []
 
     $scope.addItem = ->
       console.log 'item: ' + JSON.stringify($scope.item)      
@@ -28,25 +33,12 @@ app.controller 'ItemsCreateController', [
           $scope.item = {};
           $location.path '/admin/list'
           return
-      ),(errorResponse) ->
+        ),(errorResponse) ->
           console.log 'Error:' + JSON.stringify(errorResponse)
           return
       return
 
-    return
-
-]
-
-app.controller 'ItemsListController', [
-
-  '$scope'
-  'ItemsQuery'
-
-  ($scope, ItemsQuery) ->
-
-    $scope.itemList = []
-
-    ItemsQuery.get {}, ((response) ->
+    ItemsQuery.query {}, ((response) ->
       console.log 'Success:' + JSON.stringify(response)
       $scope.itemList = response
       return
@@ -54,17 +46,26 @@ app.controller 'ItemsListController', [
       console.log 'Error:' + JSON.stringify(errorResponse)
       return
 
+    $scope.removeItem = ( itemId ) ->
+      console.log 'Item Id is ' + itemId
+      return
+
+
     return
 
 ]
 
-app.controller 'ItemsViewController', [
+app.controller 'ItemViewController', [
+
   '$scope'
   '$routeParams'
   'ItemsCRUD'
+
   ($scope, $routeParams, ItemsCRUD) ->
+
+
     itemId = $routeParams.id
-    #$scope.blg = 1
+    
     console.log 'itemId: ' + itemId
     ItemsCRUD.get { id: itemId }, ((response) ->
       console.log 'Success:' + JSON.stringify(response)
@@ -73,18 +74,7 @@ app.controller 'ItemsViewController', [
     ), (errorResponse) ->
       console.log 'Error:' + JSON.stringify(errorResponse)
       return
-    return
-]
 
-app.controller 'ItemsDeleteController', [
-  '$scope'
-  '$routeParams'
-  'ItemsCRUD'
-  ($scope, $routeParams, ItemsCRUD) ->
-
-    $scope.removeItem = ( itemId ) ->
-      console.log 'Item Id is ' + itemId
-      return
 
     return
 ]

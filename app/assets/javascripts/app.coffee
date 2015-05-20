@@ -30,19 +30,19 @@ app.config ($routeProvider, $locationProvider) ->
 
   $routeProvider.when '/items', 
     templateUrl: '/assets/partials/items.html'
-    controller: 'ItemsListController'
+    controller: 'ItemsController'
 
   $routeProvider.when '/create', 
     templateUrl: '/assets/partials/admin/items/create.html'
-    controller: 'ItemsCreateController'
+    controller: 'ItemsController'
 
   $routeProvider.when '/admin/list', 
     templateUrl: '/assets/partials/admin/items/list.html'
-    controller: 'ItemsListController'
+    controller: 'ItemsController'
 
   $routeProvider.when '/item/:id', 
     templateUrl: '/assets/partials/admin/items/id.html'
-    controller: 'ItemsViewController'
+    controller: 'ItemViewController'
 
   $routeProvider.otherwise 
     redirectTo: '/'

@@ -7,14 +7,10 @@ app.factory 'ItemsQuery', [
   '$resource'
   ($resource) ->
     $resource '/admin/items', {},
-      get:
+      query:
         method: 'GET'
         cache: false
         isArray: true
-      query:
-        method: 'POST'
-        cache: false
-        isArray: false
 ]
 
 #app.factory 'ItemsPost', [
