@@ -151,5 +151,19 @@ object Items extends Controller with MongoController {
     }
   }
 
+  def delete(id: String) = Action.async(parse.anyContent) { request =>
+
+    val futureResult = collection.remove(Json.obj("_id" -> Json.obj("$oid" -> id)), firstMatchOnly = true)
+    futureResult.map {
+      case t => t.inError match {
+        case true => 
+          InternalServerError("%s".format(t))
+        case false => 
+          Ok("success")
+      }
+    }
+
+  }
+
 
 }

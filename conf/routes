@@ -27,3 +27,4 @@ POST        /admin/item                     controllers.Items.createFromJson
 GET         /admin/items                     controllers.Items.findAllItems
 #GET         /admin/item/:slug                controllers.Items.getBySlug( slug: String )
 GET         /admin/item/:id                  controllers.Items.getById( id: String )
+DELETE      /admin/item/:id                  controllers.Items.delete( id: String )

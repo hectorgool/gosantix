@@ -33,7 +33,7 @@ app.controller 'ItemsController', [
           $scope.item = {};
           $location.path '/admin/list'
           return
-        ),(errorResponse) ->
+          ),(errorResponse) ->
           console.log 'Error:' + JSON.stringify(errorResponse)
           return
       return
@@ -42,12 +42,21 @@ app.controller 'ItemsController', [
       console.log 'Success:' + JSON.stringify(response)
       $scope.itemList = response
       return
-    ), (errorResponse) ->
+      ), (errorResponse) ->
       console.log 'Error:' + JSON.stringify(errorResponse)
       return
 
     $scope.removeItem = ( itemId ) ->
+
       console.log 'Item Id is ' + itemId
+      ItemsCRUD.delete { id: itemId }, ((response) ->
+        console.log 'Success:' + JSON.stringify(response)
+        $scope.jsonResponse = response
+        return
+        ), (errorResponse) ->
+        console.log 'Error:' + JSON.stringify(errorResponse)
+        return
+
       return
 
 
