@@ -51,7 +51,8 @@ app.controller 'ItemsController', [
       console.log 'Item Id is ' + itemId
       ItemsCRUD.delete { id: itemId }, ((response) ->
         console.log 'Success:' + JSON.stringify(response)
-        $scope.jsonResponse = response
+        $scope.jsonResponse = response        
+        $scope.itemList.splice itemId, 1 #beta
         return
         ), (errorResponse) ->
         console.log 'Error:' + JSON.stringify(errorResponse)
