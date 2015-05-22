@@ -24,9 +24,11 @@ app.config ($routeProvider, $locationProvider) ->
 
   $routeProvider.when '/catalog/:catalog',
     templateUrl: '/assets/partials/catalog.html'
+    controller: 'ItemsController'
 
   $routeProvider.when '/catalog/:catalog/item/:item',
     templateUrl: '/assets/partials/catalog_item.html'
+    controller: 'ItemViewController'
 
   $routeProvider.when '/items', 
     templateUrl: '/assets/partials/items.html'
