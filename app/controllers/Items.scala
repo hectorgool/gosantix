@@ -69,11 +69,14 @@ object Items extends Controller with MongoController {
       Reads.jsPickBranch[JsString](__ \ "name") and
       Reads.jsPickBranch[JsString](__ \ "slug") and
       Reads.jsPickBranch[JsString](__ \ "sku") and
+      Reads.jsPickBranch[JsNumber](__ \ "price") and
+      Reads.jsPickBranch[JsNumber](__ \ "cost") and
       Reads.jsPickBranch[JsString](__ \ "description") and
+                                  (__ \ "creationDate").json.put( JsNumber( new java.util.Date().getTime()) ) and
+                                  (__ \ "updateDate").json.put( JsNumber( new java.util.Date().getTime()) ) and
       Reads.jsPickBranch[JsBoolean](__ \ "active") reduce
 
-    println(transformer)
-
+    //println(transformer)
     request.body.transform(transformer).map { result =>
       collection.insert(result).map { lastError =>
         Logger.debug(s"Successfully inserted with LastError: $lastError")

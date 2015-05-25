@@ -1,11 +1,18 @@
 package models
 
 
+import org.joda.time.DateTime
+
+
 case class Item( 
   name: String,
   slug: String,
   sku: String,
-  description: String,    
+  price: Option[BigDecimal],
+  cost: Option[BigDecimal],
+  description: String,
+  creationDate: Option[DateTime],
+  updateDate: Option[DateTime],
   active: Boolean
 )
 

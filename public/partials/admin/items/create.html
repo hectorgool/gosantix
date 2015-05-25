@@ -75,6 +75,56 @@
 
             <div class="form-group">
 
+                <label for="price">
+                    Price
+                </label>
+
+                <div role="alert">
+                  <span class="error" ng-show="itemForm.price.$dirty && itemForm.price.$error.number">
+                    Not valid number
+                  </span>
+                </div>
+
+                <input type="number" 
+                       id="price" 
+                       name="price" 
+                       placeholder="10.23"  
+                       autocomplete="off" 
+                       class="form-control input-lg" 
+                       ng-model="item.price" 
+                       ng-maxlength="8" 
+                       required
+                />
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="cost">
+                    Cost
+                </label>
+
+                <div role="alert">
+                  <span class="error" ng-show="itemForm.cost.$dirty && itemForm.cost.$error.number">
+                    Not valid number
+                  </span>
+                </div>
+
+                <input type="number" 
+                       id="cost" 
+                       name="cost" 
+                       placeholder="9.23"  
+                       autocomplete="off" 
+                       class="form-control input-lg" 
+                       ng-model="item.cost" 
+                       ng-maxlength="8" 
+                       required
+                />
+
+            </div>
+
+            <div class="form-group">
+
                 <label for="description">
                     Description
                 </label>

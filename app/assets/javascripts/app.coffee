@@ -24,7 +24,7 @@ app.config ($routeProvider, $locationProvider) ->
 
   $routeProvider.when '/catalog/:catalog',
     templateUrl: '/assets/partials/catalog.html'
-    controller: 'ItemsController'
+    controller: 'ItemsController' 
 
   $routeProvider.when '/catalog/:catalog/item/:item',
     templateUrl: '/assets/partials/catalog_item.html'
