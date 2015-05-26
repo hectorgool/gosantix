@@ -4,6 +4,7 @@
 dependencies = [
   'items.services'
   'slugifier'
+  'items.translate'
 ]
 
 

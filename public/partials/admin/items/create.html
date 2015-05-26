@@ -4,9 +4,9 @@
     
     <div class="col-md-6 col-md-offset-3">
 
-        <h2>
-            Tutorial Angular 2 of 3
-        </h2>
+        <h1>
+            <span translate="ITEM_CREATE"></span>
+        </h1>
         
         <form role="form" 
               name="itemForm" 
@@ -19,18 +19,18 @@
             <div class="form-group">
 
                 <label for="name">
-                    Name
+                    <span translate="ITEM_NAME"></span>
                 </label>
 
                 <div role="alert">
                   <span class="error" ng-show="itemForm.name.$dirty && itemForm.name.$error.required">
-                    Required!
+                    <span translate="ITEM_REQUIRED"></span>
                   </span>
                   <span class="error" ng-show="itemForm.name.$dirty && itemForm.name.$error.maxlength">
-                    Max Length!
+                    <span translate="ITEM_FIELD_MAX_LENGTH"></span>
                   </span>
                   <span class="error" ng-show="itemForm.name.$dirty && itemForm.name.$invalid">
-                    This field is invalid
+                    <span translate="ITEM_THIS_FIELD_IS_INVALID"></span>
                   </span>
                 </div>
 
@@ -52,12 +52,12 @@
             <div class="form-group">
 
                 <label for="sku">
-                    Sku
+                  <span translate="ITEM_SKU"></span>
                 </label>
 
                 <div role="alert">
                   <span class="error" ng-show="itemForm.sku.$dirty && itemForm.sku.$error.maxlength">
-                    Max Length!
+                    <span translate="ITEM_FIELD_MAX_LENGTH"></span>
                   </span>
                 </div>
 
@@ -76,12 +76,12 @@
             <div class="form-group">
 
                 <label for="price">
-                    Price
+                  <span translate="ITEM_PRICE"></span>
                 </label>
 
                 <div role="alert">
                   <span class="error" ng-show="itemForm.price.$dirty && itemForm.price.$error.number">
-                    Not valid number
+                    <span translate="ITEM_THIS_FIELD_IS_NOT_NUMBER"></span>
                   </span>
                 </div>
 
@@ -101,12 +101,12 @@
             <div class="form-group">
 
                 <label for="cost">
-                    Cost
+                  <span translate="ITEM_COST"></span>
                 </label>
 
                 <div role="alert">
                   <span class="error" ng-show="itemForm.cost.$dirty && itemForm.cost.$error.number">
-                    Not valid number
+                    <span translate="ITEM_THIS_FIELD_IS_NOT_NUMBER"></span>
                   </span>
                 </div>
 
@@ -126,15 +126,15 @@
             <div class="form-group">
 
                 <label for="description">
-                    Description
+                  <span translate="ITEM_DESCRIPTION"></span>
                 </label>
 
                 <div role="alert">
                   <span class="error" ng-show="itemForm.description.$dirty && itemForm.description.$error.required">
-                    Required!
+                    <span translate="ITEM_REQUIRED"></span>
                   </span>
                   <span class="error" ng-show="itemForm.description.$dirty && itemForm.description.$error.maxlength">
-                    Max Length!
+                    <span translate="ITEM_FIELD_MAX_LENGTH"></span>
                   </span>
                 </div>
 
@@ -154,12 +154,14 @@
             <div class="checkbox">
               <label>
                 <input type="checkbox" id="active" name="active" ng-model="item.active" checked>
-                <strong>Active</strong>
+                <strong>
+                  <span translate="ITEM_ACTIVE"></span>
+                </strong>
               </label>
             </div>    
                      
             <button type="submit"  class="btn btn-lg btn-white btn-block">
-              Create Item
+              <span translate="ITEM_CREATE"></span>
             </button>
 
             <!--

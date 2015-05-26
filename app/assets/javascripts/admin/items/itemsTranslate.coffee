@@ -6,7 +6,7 @@ dependencies = [
   'pascalprecht.translate'
 ]
 
-app = angular.module('translate', dependencies)
+app = angular.module('items.translate', dependencies)
 
 app.config ($translateProvider) ->
 
