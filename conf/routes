@@ -5,14 +5,6 @@
 # Home page
 GET     /                                     controllers.Application.index
 
-#silouette
-GET         /user                            @controllers.ApplicationController.user
-GET         /auth/logout                     @controllers.ApplicationController.signOut
-POST        /auth/signin                     @controllers.CredentialsAuthController.authenticate
-POST        /auth/signup                     @controllers.SignUpController.signUp
-GET         /authenticate/:provider          @controllers.SocialAuthController.authenticate(provider)
-POST        /authenticate/:provider          @controllers.SocialAuthController.authenticate(provider)
-
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                    controllers.Assets.at(path="/public", file)
